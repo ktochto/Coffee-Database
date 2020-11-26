@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+<from action="#" th:action="@{/>user-update}" th:object="${user}" method="post">
+    <label for="id">Id</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <br/>
+    <label for="firstName">Coffee</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="Coffee">
+    <br/>
+    <label for="lastName">Country</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Country">
+    <br/>
+    <label for="descriptions">Descriptions</label>
+    <input type="text" th:field="*{descriptions}" id="descriptions" placeholder="Descriptions">
+    <br/>
+    <input type="submit" value="Update">
+</from>
+
+</body>
+</html>
