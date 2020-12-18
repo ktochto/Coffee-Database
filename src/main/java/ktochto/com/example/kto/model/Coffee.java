@@ -5,17 +5,14 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "coffee")
+public class Coffee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
-    @Column(name = "descriptions")
+    private String sort;
+    private String country;
     private String descriptions;
 
 }

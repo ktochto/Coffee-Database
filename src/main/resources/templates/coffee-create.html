@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add coffee</title>
+</head>
+<body>
+<form action="#" th:action="@{/coffee-create}" th:object="${coffee}" method="post">
+    <label for="sort">Coffee</label>
+    <input type="text" th:field="*{sort}" id="sort" placeholder="Add">
+    <label for="country">Country</label>
+    <input type="text" th:field="*{country}" id="country" placeholder="Add">
+    <label for="country">Descriptions</label>
+    <input type="text" th:field="*{descriptions}" id="descriptions" placeholder="Add">
+    <input type="submit" value="Add coffee">
+</form>
+</body>
+</html>
