@@ -1,6 +1,8 @@
 package ktochto.com.example.kto.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Data
