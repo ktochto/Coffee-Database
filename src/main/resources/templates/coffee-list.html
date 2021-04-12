@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee</title>
+</head>
+<body>
+<div th:switch="${coffee}">
+    <h2 th:case="null">No found</h2>
+    <div th:case="*">
+        <h2>Coffee</h2>
+        <table>
+            <form th:action="@{/}">
+                <label>Choose country</label>
+                <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                <input type="submit" value="Choose">
+            </form>
+            <form th:action="@{/coffee}">
+                <input type="submit" value="Show all">
+            </form>
+            <thead>
+            <p>
+            <tr>
+                <th>Coffee</th>
+                <th>Country</th>
+                <th>Descriptions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coffee : ${coffee}">
+                <td th:text="${coffee.sort}"></td>
+                <td th:text="${coffee.country}"></td>
+                <td th:text="${coffee.descriptions}"></td>
+                <td><a th:href="@{update/{id}(id=${coffee.id})}">Edit</a></td>
+                <td><a th:href="@{coffee-delete/{id}(id=${coffee.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/coffee-create">Add coffee</a></p>
+</div>
+</body>
+</html>

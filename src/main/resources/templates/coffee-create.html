@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Add coffee</title>
+</head>
+<body>
+<form th:action="@{/coffee-create}" th:object="${coffee}" method="post">
+    <label for="sort">Coffee</label>
+    <input type="text" id="sort" th:field="*{sort}" placeholder="Add">
+    <label for="country">Country</label>
+    <input type="text" id="country" th:field="*{country}" placeholder="Add">
+    <label for="country">Descriptions</label>
+    <input type="text" id="descriptions" th:field="*{descriptions}" placeholder="Add">
+    <input type="submit" value="Add coffee">
+</form>
+</body>
+</html>
