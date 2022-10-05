@@ -1,7 +1,7 @@
 package ktochto.com.example.kto.controller;
 
 import ktochto.com.example.kto.model.Coffee;
-import ktochto.com.example.kto.service.CoffeeService;
+import ktochto.com.example.kto.service.CoffeeManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -13,18 +13,19 @@ import java.util.List;
 
 @Controller
 public class CoffeeController {
-
-    private final CoffeeService coffeeService;
+    private final CoffeeManageService coffeeManageService;
+    private static final String REDIRECT_COFFEE = "redirect:/coffee";
+    private static final String COFFEE_ATTRIBUTE = "coffee";
 
     @Autowired
-    public CoffeeController(CoffeeService coffeeService) {
-        this.coffeeService = coffeeService;
+    public CoffeeController(CoffeeManageService coffeeManageService) {
+        this.coffeeManageService = coffeeManageService;
     }
 
     @GetMapping("/coffee")
     public String findAll(Model model) {
-        List<Coffee> coffee = coffeeService.findAll();
-        model.addAttribute("coffee", coffee);
+        List<Coffee> coffee = coffeeManageService.findAll();
+        model.addAttribute(COFFEE_ATTRIBUTE, coffee);
         return "coffee-list";
     }
 
@@ -35,32 +36,32 @@ public class CoffeeController {
 
     @PostMapping("/coffee-create")
     public String createCoffee(@Validated Coffee coffee, Model model) {
-        coffeeService.saveCoffee(coffee);
-        return "redirect:/coffee";
+        coffeeManageService.saveCoffee(coffee);
+        return REDIRECT_COFFEE;
     }
 
     @GetMapping("/coffee-delete/{id}")
     public String deleteCoffee(@PathVariable("id") Long id) {
-        coffeeService.deleteCoffee(id);
-        return "redirect:/coffee";
+        coffeeManageService.deleteCoffee(id);
+        return REDIRECT_COFFEE;
     }
 
     @GetMapping("/update/{id}")
     public String updateCoffeeForm(@PathVariable("id") Long id, Model model){
-        Coffee coffee = coffeeService.findCoffee(id);
-        model.addAttribute("coffee", coffee);
+        Coffee coffee = coffeeManageService.findCoffee(id);
+        model.addAttribute(COFFEE_ATTRIBUTE, coffee);
         return "coffee-update";
     }
 
     @PostMapping("/update/{id}")
     public String updateCoffee(Coffee coffee){
-        coffeeService.saveCoffee(coffee);
-        return "redirect:/coffee";
+        coffeeManageService.saveCoffee(coffee);
+        return REDIRECT_COFFEE;
     }
 
     @RequestMapping("/")
     public String filterCoffee(Model model, @Param("keyword") String keyword) {
-        model.addAttribute("coffee", coffeeService.findByCountry(keyword));
+        model.addAttribute(COFFEE_ATTRIBUTE, coffeeManageService.findByCountry(keyword));
         model.addAttribute("keyword", keyword);
         return "coffee-list";
     }

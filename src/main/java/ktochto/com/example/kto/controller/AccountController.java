@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AccountController {
-
     @Autowired
     private AccountService accountService;
-
     @Autowired
     private SecurityService securityService;
-
     @Autowired
     private AccountValidator accountValidator;
 

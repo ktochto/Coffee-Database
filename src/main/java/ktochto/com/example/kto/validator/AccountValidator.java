@@ -2,34 +2,33 @@ package ktochto.com.example.kto.validator;
 
 import ktochto.com.example.kto.model.Account;
 import ktochto.com.example.kto.service.AccountService;
+import lombok.AllArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
+@AllArgsConstructor
 public class AccountValidator implements Validator {
-
     private final AccountService accountService;
+    private static final String USERNAME = "username";
 
-    public AccountValidator(AccountService accountService) {
-        this.accountService = accountService;
-    }
-
-    public boolean supports(Class<?> aClass){
+    public boolean supports(@NonNull Class<?> aClass){
         return Account.class.equals(aClass);
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
+    public void validate(@NonNull Object o, @NonNull Errors errors) {
         Account account = (Account) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, USERNAME, "NotEmpty");
         if (account.getUsername().length() < 6 || account.getUsername().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+            errors.rejectValue(USERNAME, "Size.userForm.username");
         }
         if (accountService.findByUsername(account.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+            errors.rejectValue(USERNAME, "Duplicate.userForm.username");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");

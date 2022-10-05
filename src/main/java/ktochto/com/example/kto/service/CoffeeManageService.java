@@ -2,21 +2,17 @@ package ktochto.com.example.kto.service;
 
 import ktochto.com.example.kto.model.Coffee;
 import ktochto.com.example.kto.repository.CoffeeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CoffeeService {
-
+@AllArgsConstructor
+public class CoffeeManageService {
     @Autowired
     private final CoffeeRepository coffeeRepository;
-
-    @Autowired
-    public CoffeeService(CoffeeRepository coffeeRepository) {
-        this.coffeeRepository = coffeeRepository;
-    }
 
     public Coffee findCoffee(Long id) { return coffeeRepository.getOne(id); }
 
